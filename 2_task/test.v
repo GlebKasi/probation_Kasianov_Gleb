@@ -2,21 +2,21 @@
 module top();
 reg	slk;
 wire	[7:0]res;
-reg [2:0] data;
+reg 	[2:0] data;
 
 initial begin
 	slk = 0;
-	data = 0;
+	data = 1;
 end
 
 always begin
 	#5 slk = ~slk;
 	data = data + 1;
 end
-	decoder dc
+	decoder my_decoder
 	(
 		.data(data),
-		.results(res)
+		.result(res)
 	);
 
 initial begin
