@@ -8,13 +8,13 @@ always @(posedge clk)
 if(reset)
 begin
 	signal <= 1'b0;
-	n <= 1'b0;
+	n <= 3'b000;
 end
 else
 	if(n == 2)
 	begin
 		signal <= ~signal;
-		n <= 1'b0; 
+		n <= 3'b000; 
 	end
 	else
 		n <= n + 1;
