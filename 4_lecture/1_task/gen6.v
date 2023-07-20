@@ -3,18 +3,18 @@ module gen6(
 	input 	reset,
 	output	reg 	signal
 );
-reg	[2:0]	n;
+reg	[1:0]	n;
 always @(posedge clk)
 if(reset)
 begin
 	signal <= 1'b0;
-	n <= 3'b000;
+	n <= 2'b00;
 end
 else
 	if(n == 2)
 	begin
 		signal <= ~signal;
-		n <= 3'b000; 
+		n <= 2'b00; 
 	end
 	else
 		n <= n + 1;

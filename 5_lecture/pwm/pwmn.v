@@ -10,15 +10,15 @@ module pwmn
 );
 reg	[SIZE_REG : 0]	n;
 
-assign	pwm_signal = (n == N - 1);
+assign	pwm_signal = ((n == 1) && clk) || ((n == 0) && ~clk);
 
-always @(clk)
+always @(posedge clk)
 	if(reset)
 		n <= 0;
 	else
-		if(n == N - 1)
-			n <= 0;
+		if(n >= N - 1)
+			n <= n - (N - 1);
 		else
-			n <= n + 1;
+			n <= n + 2;
 
 endmodule
