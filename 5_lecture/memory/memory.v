@@ -24,6 +24,10 @@ begin
 	begin
 		read <= mem[rd_addr];
 	end
+end
+
+always @(posedge clk)
+begin
 	if (wr_en)
 	begin
 		mem[wr_addr] <= wr_data;
