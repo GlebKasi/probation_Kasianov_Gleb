@@ -5,20 +5,20 @@ module fifo
 	parameter	FIFO_MAX_ADDR 	= $clog2(FIFO_DEPTH)
 )
 (
-	input					clk,
-	input					reset,
-	input					rd_en,
-	input					wr_en,
+	input									clk,
+	input									reset,
+	input									rd_en,
+	input									wr_en,
 	input			[DATA_WIDTH - 1 : 0]	wr_data,
 	output	wire	[DATA_WIDTH - 1 : 0]	rd_data,
-	output	wire				rd_val,
-	output	wire				wr_ready
+	output	wire							rd_val,
+	output	wire							wr_ready
 );
 
-reg		val;	
+reg								val;	
 reg		[DATA_WIDTH - 1 : 0]	read;
 reg		[FIFO_MAX_ADDR : 0]		busy;
-reg		[FIFO_DEPTH - 1 : 0]	mem	[DATA_WIDTH - 1 : 0];
+reg		[FIFO_DEPTH - 1 : 0]	mem		[DATA_WIDTH - 1 : 0];
 
 assign 	rd_data 	= read;
 assign	rd_val		= val;
@@ -30,9 +30,9 @@ generate
 	begin: switch 
 		always @(posedge clk)
 		begin
-			if((~reset) && (rd_en) && (i != 0))
+			if((~reset) && (rd_en) && (i != FIFO_DEPTH - 1))
 			begin
-				mem[i - 1] <= mem[i];
+				mem[i] <= mem[i + 1];
 			end
 			if((~reset) && (wr_en) && (busy != FIFO_DEPTH) && (busy == i))
 				mem[i] <= wr_data;			
