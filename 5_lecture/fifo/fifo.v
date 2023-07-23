@@ -30,7 +30,7 @@ generate
 	begin: switch 
 		always @(posedge clk)
 		begin
-			if((~reset) && (rd_en) && (i != FIFO_DEPTH - 1))
+			if((~reset) && (rd_en) && (i != FIFO_DEPTH - 1) && (i < busy))
 			begin
 				mem[i] <= mem[i + 1];
 			end
