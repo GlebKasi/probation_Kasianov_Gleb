@@ -4,7 +4,7 @@ module pwm(
 	output 	reg	pwm_signal
 );
 reg [2:0]n;
-always @(clk)
+always @(posedge clk)
 	if(reset)
 	begin
 		pwm_signal <= 0;
