@@ -5,17 +5,12 @@ module gen6(
 );
 reg	[1:0]	n;
 always @(posedge clk)
-if(reset)
 begin
-	signal <= 1'b0;
-	n <= 2'b00;
+	signal <= (reset) ? 1'b0 : (n == 2) ? ~signal : signal;
 end
-else
-	if(n == 2)
-	begin
-		signal <= ~signal;
-		n <= 2'b00; 
-	end
-	else
-		n <= n + 1;
+
+always @(posedge clk)
+begin
+	n <= (reset | n == 2) ? 2'b00 : n + 1;
+end
 endmodule
