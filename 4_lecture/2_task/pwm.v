@@ -1,13 +1,11 @@
 module pwm(
 	input	clk,
 	input	reset,
-	output 	reg	pwm_signal
+	output 	wire	pwm_signal
 );
 reg [2:0]n;
-always @(posedge clk)
-begin
-	pwm_signal <= (reset) ? 0 : (n == 4) ? 1 : 0;
-end
+
+assign	pwm_signal = (n == 4) ? 1 : 0;
 
 always @(posedge clk)
 begin
